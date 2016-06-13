@@ -1,0 +1,78 @@
+<html>
+<head>
+ <title>5 mins particles</title>
+ <meta charset="utf-8">
+ <style>
+ body {
+      background: #000;
+      margin: 0;
+}
+
+ </style>
+ <script type="text/javascript">
+var canvas = document.getElementById('canvas');
+
+
+
+window.onload = function() {
+				var theCanvas = document.getElementById('canvas');
+				if (theCanvas && theCanvas.getContext) {
+					var ctx = theCanvas.getContext("2d");
+					if (ctx) {
+						//ctx = canvas.getContext('2d');
+ParticleArray = [];
+setInterval(draw,30);
+
+var hue=120;
+function draw() {
+  var Particle = {
+    x: mx,
+    y: my,
+    angle: random(0, Math.PI * 2),
+    speed: random(1, 10),
+    size:10,
+    hue :random
+    ( hue - 40, hue + 40 ),
+    brightness : random( 50, 80 ),
+    gravity:1,
+    friction : 0.95
+    
+  }
+  ParticleArray.push(Particle);
+  ctx.clearRect(0, 0, 1000, 1000);
+
+  for (var i = 0; i < ParticleArray.length; i++) {
+    Particle = ParticleArray[i];
+
+    ctx.fillStyle = 'hsl(' + Particle.hue + ', 100%, ' + Particle.brightness + '%)';
+    ctx.fillRect(Particle.x, Particle.y, Particle.size, Particle.size);
+    Particle.speed*=Particle.friction;
+    Particle.x += Math.cos(Particle.angle) * Particle.speed;
+    Particle.y += Math.sin(Particle.angle) * Particle.speed+Particle.gravity;
+    Particle.size*=0.99;
+  }
+  hue+=3;
+}
+
+
+function random(min, max) {
+  return Math.random()
+   * (max - min) + min;
+}
+canvas.addEventListener( 'mousemove', function( e ) {
+	mx = e.pageX - canvas.offsetLeft;
+	my = e.pageY - canvas.offsetTop;
+}); 
+					}
+				}
+			}
+
+
+ </script>
+</head>
+<body>
+ <canvas id="canvas" width="1000" height="1000">
+  Your browser does not support the HTML5 canvas tag.
+ </canvas>
+</body>
+</html>

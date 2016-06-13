@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Drawing Into the 2D Context</title>
+		
+		<script>
+//var ctx = document.getElementById('canvas').getContext('2d');
+
+
+
+
+
+    window.onload = function() {
+        var ball = {
+  x: 100,
+  y: 100,
+  radius: 25,
+  color: 'blue',
+  draw: function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
+    ctx.closePath();
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+};
+
+
+
+
+        var theCanvas = document.getElementById('canvas');
+        if (theCanvas && theCanvas.getContext) {
+          var ctx = theCanvas.getContext("2d");
+             ball.draw();
+        }
+      }
+
+		</script>
+	</head>
+	<body>
+		<h1>Drawing Into the 2D Context</h1>
+		<p>After retrieving the canvas context, you can use the drawing methods to create content</p>
+		<canvas id="canvas" width="600" height="300"></canvas>
+	</body>
+</html>

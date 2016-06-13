@@ -1,0 +1,48 @@
+{
+    "author": "Zhang zhengneng <me@chengweiyang.cn>",
+    "description": "A GitBook about learning GitBook",
+    "extension": null,
+    "generator": "site",
+    "isbn": null,
+    "links": {
+        "sharing": {
+            "all": null,
+            "facebook": null,
+            "google": null,
+            "twitter": null,
+            "weibo": null
+        },
+        "sidebar": {
+            "About Me": "http://www.zhangzhengneng.com/about",
+            "Chengwei's Blog": "http://www.zhangzhengneng.com"
+        }
+    },
+    "output": null,
+    "pdf": {
+        "fontSize": 12,
+        "footerTemplate": null,
+        "headerTemplate": null,
+        "margin": {
+            "bottom": 36,
+            "left": 62,
+            "right": 62,
+            "top": 36
+        },
+        "pageNumbers": false,
+        "paperSize": "a4"
+    },
+    "plugins": [
+        "disqus",
+        "anchors",
+        "comscore",
+        "multipart",
+        "codeblock-filename"
+    ],
+    "pluginsConfig": {
+        "disqus": {
+            "shortName": "introducetocanvans"
+        }
+    },
+    "title": "Canvans 简明教程",
+    "variables": {}
+}

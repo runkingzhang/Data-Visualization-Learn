@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Drawing Into the 2D Context</title>
+		<style type="text/css">
+			#Canvas1 {
+				border: dotted 1px black;
+			}
+		</style>
+		<script>
+
+			window.onload = function() {
+				function draw() {
+				  //var ctx = document.getElementById('canvas').getContext('2d');
+				  ctx.strokeStyle = "#fc0";
+				  ctx.lineWidth = 1.5;
+				  ctx.fillRect(0,0,300,300);
+
+				  // Uniform scaling
+				  ctx.save()
+				  ctx.translate(50,50);
+				  drawSpirograph(ctx,22,6,5);  // no scaling
+				  // x 和y 的内容对应的变化
+				  ctx.translate(100,0);
+				  ctx.scale(0.75,0.75);
+				  drawSpirograph(ctx,22,6,5);
+
+				  ctx.translate(133.333,0);
+				  ctx.scale(0.75,0.75);
+				  drawSpirograph(ctx,22,6,5);
+				  ctx.restore();
+
+				  // Non-uniform scaling (y direction)
+				  //第二行蓝色图案堆垂直方向应用了不统一的缩放因子，每个图形 x 方向上的缩放因子都是 1.0，意味着不缩放，而 y 方向缩放因子是 0.75，得出来的结果是，图案被依次压扁了。原来的圆形图案变成了椭圆，如果细心观察，还可以发现在垂直方向上的线宽也减少了。
+				  ctx.strokeStyle = "#0cf";
+				  ctx.save()
+				  ctx.translate(50,150);
+				  ctx.scale(1,0.75);
+				  drawSpirograph(ctx,22,6,5);
+
+				  ctx.translate(100,0);
+				  ctx.scale(1,0.75);
+				  drawSpirograph(ctx,22,6,5);
+
+				  ctx.translate(100,0);
+				  ctx.scale(1,0.75);
+				  drawSpirograph(ctx,22,6,5);
+				  ctx.restore();
+
+				  // Non-uniform scaling (x direction)
+				  ctx.strokeStyle = "#cf0";
+				  ctx.save()
+				  ctx.translate(50,250);
+				  ctx.scale(0.75,1);
+				  drawSpirograph(ctx,22,6,5);
+
+				  ctx.translate(133.333,0);
+				  ctx.scale(0.75,1);
+				  drawSpirograph(ctx,22,6,5);
+
+				  ctx.translate(177.777,0);
+				  ctx.scale(0.75,1);
+				  drawSpirograph(ctx,22,6,5);
+				  ctx.restore();
+				}
+
+				function drawSpirograph(ctx,R,r,O){
+				  var x1 = R-O;
+				  var y1 = 0;
+				  var i  = 1;
+				  ctx.beginPath();
+				  ctx.moveTo(x1,y1);
+				  do {
+				    if (i>20000) break;
+				    var x2 = (R+r)*Math.cos(i*Math.PI/72) - (r+O)*Math.cos(((R+r)/r)*(i*Math.PI/72))
+				    var y2 = (R+r)*Math.sin(i*Math.PI/72) - (r+O)*Math.sin(((R+r)/r)*(i*Math.PI/72))
+				    ctx.lineTo(x2,y2);
+				    x1 = x2;
+				    y1 = y2;
+				    i++;
+				  } while (x2 != R-O && y2 != 0 );
+				  ctx.stroke();
+				}
+
+				var theCanvas = document.getElementById('Canvas1');
+				if (theCanvas && theCanvas.getContext) {
+					var ctx = theCanvas.getContext("2d");
+						 draw();
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Drawing Into the 2D Context</h1>
+		<p>After retrieving the canvas context, you can use the drawing methods to create content</p>
+		<canvas id="Canvas1" width="400" height="300">Your browser does not support canvas.</canvas>
+	</body>
+</html>
